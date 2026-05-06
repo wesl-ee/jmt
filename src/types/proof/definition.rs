@@ -93,6 +93,11 @@ impl<H: SimpleHasher> SparseMerkleProof<H> {
         &self.siblings
     }
 
+    /// Returns sibling hashes ordered from bottom level to root level.
+    pub fn sibling_hashes(&self) -> Vec<[u8; 32]> {
+        self.siblings.iter().map(|n| n.hash::<H>()).collect()
+    }
+
     pub(crate) fn take_siblings(self) -> Vec<SparseMerkleNode> {
         self.siblings
     }
